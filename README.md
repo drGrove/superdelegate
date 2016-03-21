@@ -37,21 +37,20 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
     ]
     ```
 
-#### `POST` api/v1/superdelegates/searches
+#### `GET` api/v1/superdelegates?state=&delegate=&candidate=&group=
 
 ##### Data Params
 - **Status** `200`
 - **Content**
-    An object like the following is accepted, it is OK to send null values for all but one item.
+    The following query parameters are accepted
 
-    ```json
-    {
-        "state": null,
-        "delegate": "Alma Adams",
-        "candidate": null,
-        "group": null
-}
-    ```
+    | Name | Description |  
+    |------|-------------|
+    |  state  |  *  | 
+    |  delegate  |  *  |
+    |  candidate  |  *  |
+    |  group  |  *  |
+
 
 ##### Success Response
 - **Status** `200`
@@ -59,17 +58,13 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
 
     ```json
     [
-        {
-          "results": [
-              {
-                "id": "507f191e810c19729de860ea",
-                "candidate": "Clinton",
-                "delegate": "Alma Adams",
-                "group": "Rep.",
-                "state": "NC"
-            }
-          ]
-        }
+     {
+       "id": "507f191e810c19729de860ea",
+       "candidate": "Clinton",
+       "delegate": "Alma Adams",
+       "group": "Rep.",
+       "state": "NC"
+      }
     ]
     ```
 
@@ -77,7 +72,7 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
  - ##### Status Code `422 Unprocessable Entry`
 
     ```json
-    {"error": "Invalid query"}
+    { "error": "Invalid query" }
     ```
 
 
@@ -123,5 +118,5 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
 - **Content**
 
     ```json
-    {"error": "Invalid Email"}
+    { "error": "Invalid Email" }
     ```
