@@ -1,17 +1,16 @@
 # Superdelegate
 
-a [Sails](http://sailsjs.org) application that empowers citizens to contact their local superdelegate.
-
----
+a [Sails](http://sailsjs.org) application that empowers citizens to contact their nearby superdelegate.
 
 ## API
 
-### `GET` api/v1/superdelegates
+#### `GET` api/v1/superdelegates
 Returns all superdelegates. Superdelegate data is updated once daily, and comes from [Wikipedia: List of Democratic Party superdelegates, 2016](https://en.wikipedia.org/wiki/List_of_Democratic_Party_superdelegates,_2016)
 
-#### Success Response
- - ##### Status Code `200`
- - ##### Content
+##### Success Response
+ - **Status** `200`
+ - **Content**
+
     ```json
     [
       {
@@ -38,55 +37,26 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
     ]
     ```
 
-    ### `GET` api/v1/superdelegates
-    Returns all superdelegates. Superdelegate data is updated once daily, and comes from [Wikipedia: List of Democratic Party superdelegates, 2016](https://en.wikipedia.org/wiki/List_of_Democratic_Party_superdelegates,_2016)
+#### `POST` api/v1/superdelegates/searches
 
-    #### Success Response
-     - ##### Status Code `200`
-     - ##### Content
-        ```json
-        [
-          {
-            "id": "507f191e810c19729de860ea",
-            "candidate": "Clinton",
-            "delegate": "Alma Adams",
-            "group": "Rep.",
-            "state": "NC"
-          },
-          {
-            "id": "507f191e810c19729de860ea",
-            "candidate": "Clinton",
-            "delegate": "Alma Adams",
-            "group": "Rep.",
-            "state": "NC"
-          },
-          {
-            "id": "507f191e810c19729de860ea",
-            "candidate": "Clinton",
-            "delegate": "Alma Adams",
-            "group": "Rep.",
-            "state": "NC"
-          }
-        ]
-        ```
-### `POST` api/v1/superdelegates/searches
-
-#### Data Params
- - ##### Status Code `200`
- - ##### Content
+##### Data Params
+- **Status** `200`
+- **Content**
     An object like the following is accepted, it is OK to send null values for all but one item.
 
     ```json
     {
-      "state": null,
-      "delegate": "Alma Adams",
-      "candidate": null,
-      "group": null
-    }
+        "state": null,
+        "delegate": "Alma Adams",
+        "candidate": null,
+        "group": null
+}
     ```
 
-#### Success Response
- - ##### Status Code `200`
+##### Success Response
+- **Status** `200`
+- **Content**
+
     ```json
     [
         {
@@ -103,21 +73,23 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
     ]
     ```
 
-#### Error Response
+##### Error Response
  - ##### Status Code `422 Unprocessable Entry`
+
     ```json
     {"error": "Invalid query"}
     ```
 
 
-### `POST` api/v1/mail
+#### `POST` api/v1/mail
 
-#### Data Params
- - ##### Status Code `200`
- - ##### Content
+##### Data Params
+- **Status** `200`
+- **Content**
+
     ```json
     {
-      "sender_email": "john@smith.com",
+      "sender_email": "arnold@butchershop.io",
       "sender_name": "Arnold Sandoval",
       "delegate_id": "507f191e810c19729de860ea",
       "is_template_message_modified": false,
@@ -125,12 +97,17 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
     }
     ```
 
-#### Success Response
- - ##### Status Code `200`
+##### Success Response
+- **Status** `200`
+- **Content**
+
     ```json
     {
       "success": "Your message was sent!",
       "timestamp": "2016-03-21T14:30:32+00:00",
+      "sender_email": "arnold@butchershop.io",
+      "sender_name": "Arnold Sandoval",
+      "sender_message": "Dear Ms. Adams ...",
       "delegate": {
         "id": "507f191e810c19729de860ea",
         "candidate": "Clinton",
@@ -141,8 +118,10 @@ Returns all superdelegates. Superdelegate data is updated once daily, and comes 
     }
     ```
 
-#### Error Response
- - ##### Status Code `422 Unprocessable Entry`
+##### Data Params
+- **Status** `422 Unprocessable Entry`
+- **Content**
+
     ```json
     {"error": "Invalid Email"}
     ```
